@@ -6,7 +6,7 @@ sudo chmod 777 /etc/apache2/sites-enabled/000-default.conf
 
 
 echo "adding files to path"
-sudo echo 'PATH="$PATH:/var/www/Online/Files/bin"' >> ~/.profile
+sudo echo 'PATH="$PATH:/var/www/OnlineFiles/bin"' >> ~/.profile
 echo "Adding data to apache"
 echo "Listen 25500" >> /etc/apache2/sites-enabled/000-default.conf
 echo "<VirtualHost *:25500>" >> /etc/apache2/sites-enabled/000-default.conf
@@ -16,8 +16,9 @@ echo "	ErrorLog ${APACHE_LOG_DIR}/error.log" >> /etc/apache2/sites-enabled/000-d
 echo "	CustomLog ${APACHE_LOG_DIR}/access.log combined" >> /etc/apache2/sites-enabled/000-default.conf
 echo "</VirtualHost>" >> /etc/apache2/sites-enabled/000-default.conf
 sudo service apache2 restart
-echo "Finished installation"
+echo "changing permissions"
 sudo chown -R $USER:$USER /var/www/OnlineFiles
 find /var/www/OnlineFiles -type d -exec chmod 777 {} \;
-
+chmod a+x /var/www/OnlineFiles/bin/*
+echo "Finished installation"
 

@@ -1,0 +1,6 @@
+
+if [ -z "$1" ]; then
+	google-chrome --app=http://localhost:25500?FS=$HOME;
+else
+	google-chrome --app=http://localhost:25500?FS=$1;
+fi
