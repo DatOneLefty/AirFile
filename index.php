@@ -1,6 +1,6 @@
 <head>
 <title>OnlineFiles</title>
-<link rel="stylesheet" type="text/css" href="of.css?id=3">
+<link rel="stylesheet" type="text/css" href="css/normal.css">
 </head>
 
 <body>
@@ -12,11 +12,10 @@
 <div class='hold'>
 
 <?php
+require 'functions.php';
 session_start();
 if($_SESSION['access-password'] == "password here") {
 ?>
-<table>
-<tr><td></td><td>Name</td><td>Last Edited</td><td>Size</td></tr>
 <?php
 function formatBytes($size, $precision = 2)
 {
@@ -26,6 +25,28 @@ function formatBytes($size, $precision = 2)
     return round(pow(1024, $base - floor($base)), $precision) .' '. $suffixes[floor($base)];
 }
 $files = preg_grep('/^([^.])/', scandir($_GET['FS']));
+$a = 0;
+foreach($files as $file) {
+$a++;
+}
+?>
+<?php
+if ($a < 1) {
+?>
+<center>
+<img src='icns/folder.png'>
+<h1>No files here!</h1>
+<?php
+$to = $_GET['FS'] .  "/..";
+echo "<img src='icns/back.png' width='20px' height='15px'></img>&#160;&#160;&#160;&#160;&#160;<a class='back' href='index.php?FS=$to'>Back</a>";
+?>
+</center>
+<?php
+} else {
+?>
+<table>
+<tr><td></td><td><b>Name</b></td><td><b>Last Edited</b></td><td><b>Size</b></td></tr>
+<?php
 $to = $_GET['FS'] .  "/..";
 echo("<tr><td></td><td><img src='icns/back.png' width='20px' height='15px'></img>&#160;&#160;&#160;&#160;&#160;<a class='back' href='index.php?FS=$to'>Back</a></td><td>" ."</td><td>" ."</td></tr>");
 $i = 0;
@@ -35,12 +56,14 @@ foreach($files as $file) {
 	$fmt = $_GET['FS'] . "/" . $file;
 	echo("<tr id='$i'><td></td><td><img src='icns/folder.png' width='20px' height='15px'></img>&#160;&#160;&#160;&#160;&#160;<a class='folder' href='index.php?FS=$fmt'>$file</a></td><td>" . date ("F d Y H:i:s", filemtime($_GET['FS'] . "/" . $file)) .  "</td><td>Folder</td></tr>");
 	} else {
-  echo("<tr id='$i' onclick='select(" . '"' . $i .  '"' .");' style='old'><td></td><td>&#160;<img src='icns/file.png' width='15px' height='20px'></img>&#160;&#160;&#160;&#160;&#160;<a class='file'>$file</a></td><td>" . date ("F d Y H:i:s", filemtime($_GET['FS'] . "/" . $file)) .  "</td><td>" . formatBytes(filesize($_GET['FS'] . "/" . $file)) ."</td></tr>");
+	$icon = findend($file);
+  echo("<tr id='$i' onclick='select(" . '"' . $i .  '"' .");' style='old'><td></td><td>&#160;<img src='icns/$icon' width='15px' height='20px'></img>&#160;&#160;&#160;&#160;&#160;<a class='file'>$file</a></td><td>" . date ("F d Y H:i:s", filemtime($_GET['FS'] . "/" . $file)) .  "</td><td>" . formatBytes(filesize($_GET['FS'] . "/" . $file)) ."</td></tr>");
 	}
 }
+echo '</table>';
 ?>
-</table>
 <?php
+}
 } else {
 ?>
 <center>
