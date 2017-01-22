@@ -1,16 +1,9 @@
 <head>
-<title>OnlineFiles</title>
+<title>AirFile - File Viewer</title>
 <link rel="stylesheet" type="text/css" href="css/normal.css?i=2">
 </head>
 
 <body>
-<div class='nav'>
-<button>File</button>
-<button>Edit</button>
-<button>View</button>
-</div>
-<div class='hold'>
-
 <?php
 
 $whitelist = array(
@@ -27,6 +20,14 @@ require 'functions.php';
 session_start();
 if($_SESSION['access-password'] == "password here") {
 ?>
+<div class='nav'>
+<button>File</button>
+<button>Edit</button>
+<button>View</button>
+</div>
+<div class='hold'>
+
+
 <?php
 function formatBytes($size, $precision = 2)
 {

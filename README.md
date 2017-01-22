@@ -11,7 +11,7 @@ reload your terminal, then run the commands on how to run below
 
 #Running
 
-`AirFile`
+`air`
 or if you want a specific directory
 `air {directory}`
 
