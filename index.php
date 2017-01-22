@@ -1,6 +1,6 @@
 <head>
 <title>OnlineFiles</title>
-<link rel="stylesheet" type="text/css" href="css/normal.css">
+<link rel="stylesheet" type="text/css" href="css/normal.css?i=2">
 </head>
 
 <body>
@@ -52,12 +52,27 @@ echo("<tr><td></td><td><img src='icns/back.png' width='20px' height='15px'></img
 $i = 0;
 foreach($files as $file) {
 	$i++;
+	if (is_readable($_GET['FS'] . "/" . $file)) {
+		$read = True;
+	} else {
+		$read = False;
+	}
   if (is_dir($_GET['FS'] . "/" . $file)) {
 	$fmt = $_GET['FS'] . "/" . $file;
+	if ($read == True) {
 	echo("<tr id='$i'><td></td><td><img src='icns/folder.png' width='20px' height='15px'></img>&#160;&#160;&#160;&#160;&#160;<a class='folder' href='index.php?FS=$fmt'>$file</a></td><td>" . date ("F d Y H:i:s", filemtime($_GET['FS'] . "/" . $file)) .  "</td><td>Folder</td></tr>");
+
+	} else {
+		echo("<tr id='$i'><td></td><td><img src='icns/folder.png' width='20px' height='15px'></img>&#160;&#160;&#160;&#160;&#160;<a class='unre' href='index.php?FS=$fmt'>$file</a></td><td>" . date ("F d Y H:i:s", filemtime($_GET['FS'] . "/" . $file)) .  "</td><td>Folder</td></tr>");
+
+	}
 	} else {
 	$icon = findend($file);
+	if ($read == True) {
   echo("<tr id='$i' onclick='select(" . '"' . $i .  '"' .");' style='old'><td></td><td>&#160;<img src='icns/$icon' width='15px' height='20px'></img>&#160;&#160;&#160;&#160;&#160;<a class='file'>$file</a></td><td>" . date ("F d Y H:i:s", filemtime($_GET['FS'] . "/" . $file)) .  "</td><td>" . formatBytes(filesize($_GET['FS'] . "/" . $file)) ."</td></tr>");
+	} else {
+  echo("<tr id='$i' onclick='select(" . '"' . $i .  '"' .");' style='old'><td></td><td>&#160;<img src='icns/$icon' width='15px' height='20px'></img>&#160;&#160;&#160;&#160;&#160;<a class='unre'>$file</a></td><td>" . date ("F d Y H:i:s", filemtime($_GET['FS'] . "/" . $file)) .  "</td><td>" . formatBytes(filesize($_GET['FS'] . "/" . $file)) ."</td></tr>");
+	}
 	}
 }
 echo '</table>';

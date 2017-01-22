@@ -11,7 +11,7 @@ padding:0;
 }
 
 .hold {
-margin: 1%;
+margin: 3%;
 }
 
 table {
@@ -22,21 +22,26 @@ tr {
 }
 
 td {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid lightgray;
  
 }
 a.folder {
-	color: red;
+	color: gray;
 	text-decoration: none;
 }
 
 a.file {
-	color: orange;
+	color: gray;
 	text-decoration: none;
 }
 
 a.back {
-	color: yellow;
+	color: gray;
+	text-decoration: none;
+}
+
+a.unre {
+	color: lightgray;
 	text-decoration: none;
 }
 
