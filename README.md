@@ -1,19 +1,19 @@
-#OnlineFiles
-OnlineFiles is a system written in PHP to be able to work with your files in an easy way in chrome
+#AirFile
+AirFile is a system written in PHP to be able to work with your files in an easy way in chrome
 
 #Installation
 
 run these commands
-`git clone https://github.com/DatOneLefty/OnlineFiles`
-`cd OnlineFiles`
+`git clone https://github.com/DatOneLefty/AirFile`
+`cd AirFile`
 `./install.sh`
 reload your terminal, then run the commands on how to run below
 
 #Running
 
-`onlinefiles`
+`AirFile`
 or if you want a specific directory
-`onlinefiles {directory}`
+`air {directory}`
 
 #Dependencies
 1.  Apache2
