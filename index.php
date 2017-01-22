@@ -12,6 +12,17 @@
 <div class='hold'>
 
 <?php
+
+$whitelist = array(
+    '127.0.0.1',
+    '::1'
+);
+
+if(!in_array($_SERVER['REMOTE_ADDR'], $whitelist)){
+        die('Access Denied');
+} else {
+
+
 require 'functions.php';
 session_start();
 if($_SESSION['access-password'] == "password here") {
@@ -88,6 +99,7 @@ Access Password: <input type="password" name="password"><br>
 </form>
 </center>
 <?php
+}
 }
 ?>
 </div>
