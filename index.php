@@ -1,6 +1,7 @@
 <head>
 <title>AirFile - File Viewer</title>
-<link rel="stylesheet" type="text/css" href="css/normal.css?i=2">
+<link rel="stylesheet" type="text/css" href="css/normal.css?i=3">
+<script src='js/airfile.js'></script>
 </head>
 
 <body>
@@ -17,12 +18,23 @@ session_start();
 if($_SESSION['access-password'] == "password here") {
 ?>
 <div class='nav'>
-<button>File</button>
-<button>Edit</button>
-<button>View</button>
+<div class="dropdown">
+  <button>File</button>
+  <div class="dropdown-content">
+    <a onclick='active("goto");'>Go To Dir</a><br>
+    <a>Prefrences</a>
+  </div>
+</div>
+<div class="dropdown">
+  <button>View</button>
+  <div class="dropdown-content">
+    <a>Dark</a><br>
+    <a>None</a>
+  </div>
+</div>
 </div>
 <div class='hold'>
-
+<div id='tmp'></div>
 
 <?php
 function formatBytes($size, $precision = 2)
@@ -76,11 +88,12 @@ foreach($files as $file) {
 	}
 	} else {
 	$icon = findend($file);
+	$fmt = $_GET['FS'] . "/" . $file;
 	$f++;
 	if ($read == True) {
 	$size = filesize($_GET['FS'] . "/" . $file);
 	$totalsize = $totalsize + $size;
-  echo("<tr id='$i' onclick='select(" . '"' . $i .  '"' .");' style='old'><td></td><td>&#160;<img src='icns/$icon' width='15px' height='20px'></img>&#160;&#160;&#160;&#160;&#160;<a class='file'>$file</a></td><td>" . date ("F d Y H:i:s", filemtime($_GET['FS'] . "/" . $file)) .  "</td><td>" . formatBytes($size) ."</td></tr>");
+  echo("<tr id='$i' onclick='select(" . '"' . $i .  '"' .");' style='old'><td></td><td>&#160;<img src='icns/$icon' width='15px' height='20px'></img>&#160;&#160;&#160;&#160;&#160;<a class='file' href='external/aedit/?FILE=$fmt'>$file</a></td><td>" . date ("F d Y H:i:s", filemtime($_GET['FS'] . "/" . $file)) .  "</td><td>" . formatBytes($size) ."</td></tr>");
 	} else {
   echo("<tr id='$i' onclick='select(" . '"' . $i .  '"' .");' style='old'><td></td><td>&#160;<img src='icns/$icon' width='15px' height='20px'></img>&#160;&#160;&#160;&#160;&#160;<a class='unre'>$file</a></td><td>" . date ("F d Y H:i:s", filemtime($_GET['FS'] . "/" . $file)) .  "</td><td>" . formatBytes(filesize($_GET['FS'] . "/" . $file)) ."</td></tr>");
 	}
