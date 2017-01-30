@@ -34,8 +34,16 @@ if($_SESSION['access-password'] == "password here") {
 </div>
 </div>
 <div class='hold'>
-<div id='tmp'></div>
 
+<?php
+if (isset($_GET['err'])) {
+if ($_GET['err'] == "NO_EXT") {
+echo '<div class="tmp"><center>The directory you tried to go to didn`t exist</center></div>';
+}
+} else {
+echo "<div id='tmp'></div>";
+}
+?>
 <?php
 function formatBytes($size, $precision = 2)
 {
@@ -126,5 +134,11 @@ function select(iteid) {
   document.getElementById(iteid).style.property = "selected";
  document.getElementById(old).style.property = "none";
  old = iteid;
+}
+
+function active(type) {
+if (type == "goto") {
+document.getElementById("tmp").innerHTML = '<div class="tmp"><center><form action="form/goto.php?OLD=<?php echo $_GET['FS']; ?>" method="post"><input type="text" name="dir" class="imp"><input class="imp" type="submit" value="go"></form></center></div>';
+}
 }
 </script>
