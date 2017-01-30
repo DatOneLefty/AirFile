@@ -1,7 +1,7 @@
 <head>
 <title>AirFile - File Viewer</title>
 <link rel="stylesheet" type="text/css" href="css/normal.css?i=3">
-<script src='js/airfile.js'></script>
+<script src='js/airfile.js?v=2'></script>
 </head>
 
 <body>
@@ -130,15 +130,10 @@ Access Password: <input type="password" name="password"><br>
 </body>
 <script>
 var old = 1;
-function select(iteid) {
-  document.getElementById(iteid).style.property = "selected";
- document.getElementById(old).style.property = "none";
- old = iteid;
-}
 
 function active(type) {
 if (type == "goto") {
-document.getElementById("tmp").innerHTML = '<div class="tmp"><center><form action="form/goto.php?OLD=<?php echo $_GET['FS']; ?>" method="post"><input type="text" name="dir" class="imp"><input class="imp" type="submit" value="go"></form></center></div>';
+document.getElementById("tmp").innerHTML = httpGet("pane_html/goto.html");
 }
 }
 </script>
