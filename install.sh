@@ -1,12 +1,12 @@
 #!/bin/sh
 echo "copying files"
 sudo cp -r ../AirFile /var/www
-sudo chmod 755 ~/.profile
+sudo chmod 755 ~/.bashrc
 sudo chmod 777 /etc/apache2/sites-enabled/000-default.conf
 
 
 echo "adding files to path"
-sudo echo 'PATH="$PATH:/var/www/AirFile/bin"' >> ~/.profile
+sudo echo 'PATH=$PATH:/var/www/AirFile/bin' >> ~/.bashrc
 echo "Adding data to apache"
 echo "Listen 25500" >> /etc/apache2/sites-enabled/000-default.conf
 echo "<VirtualHost *:25500>" >> /etc/apache2/sites-enabled/000-default.conf
