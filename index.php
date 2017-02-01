@@ -133,7 +133,7 @@ var old = 1;
 
 function active(type) {
 if (type == "goto") {
-document.getElementById("tmp").innerHTML = httpGet("pane_html/goto.html");
+document.getElementById("tmp").innerHTML = httpGet("pane_html/goto.php?FS=<?php echo $_GET['FS']; ?>");
 }
 }
 </script>
