@@ -1,6 +1,6 @@
 <head>
 <title>AirFile - File Viewer</title>
-<link rel="stylesheet" type="text/css" href="css/normal.css?i=3">
+<link rel="stylesheet" type="text/css" href="css/normal.css?i=4">
 <script src='js/airfile.js?v=2'></script>
 </head>
 
@@ -23,6 +23,7 @@ if($_SESSION['access-password'] == "password here") {
   <div class="dropdown-content">
     <a onclick='active("goto");'>Go To Dir</a><br>
     <a>Prefrences</a>
+    <a href='form/logout.php'>Lock</a>
   </div>
 </div>
 <div class="dropdown">
@@ -117,10 +118,14 @@ echo "<br> In total there are " . ($f + $d) . " files and directories</center>";
 } else {
 ?>
 <center>
+<div class='hold'>
+<h1>This AirFile system is locked</h1>
+<h3>Please enter the AirFile password</h3>
 <form action="login.php" method="post">
 Access Password: <input type="password" name="password"><br>
 <input type="submit">
 </form>
+</div>
 </center>
 <?php
 }

@@ -1,6 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
-
+input {
+padding: 5px;
+margin: 5px;
+border: 1px solid black;
+border-radius:5px;
+}
 * {
 font-family: 'Roboto', sans-serif;
 
