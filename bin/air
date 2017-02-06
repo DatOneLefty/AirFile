@@ -1,6 +1,2 @@
-
-if [ -z "$1" ]; then
-	google-chrome --app=http://localhost:25500/index.php?FS=$HOME;
-else
-	google-chrome --app=http://localhost:25500/index.php?FS=$1;
-fi
+cd /var/www/AirFile/bin
+python air.py $1
