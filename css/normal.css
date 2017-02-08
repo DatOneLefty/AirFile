@@ -65,12 +65,14 @@ margin: 3%;
 
 table {
 	width: 100%;
+	border: 0;
 }
 tr {
 
 }
 
 td {
+  border: 0px;
   border-bottom: 1px solid lightgray;
  
 }

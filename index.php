@@ -34,6 +34,15 @@ if($_SESSION['access-password'] == "password here") {
   </div>
 </div>
 </div>
+<table height="100%">
+<tr>
+<td width='20%' bgcolor="lightgray">
+<?php
+$username = $_GET['USERNAME'];
+echo $username;
+?>
+</td>
+<td>
 <div class='hold'>
 
 <?php
@@ -113,6 +122,9 @@ echo "<br><center>a total of $f files taking up " . formatBytes($totalsize) . "(
 echo "<br>There is also $d folders";
 echo "<br> In total there are " . ($f + $d) . " files and directories</center>";
 ?>
+</tr>
+</td>
+</table>
 <?php
 }
 } else {
