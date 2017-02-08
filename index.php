@@ -1,6 +1,6 @@
 <head>
 <title>AirFile - File Viewer</title>
-<link rel="stylesheet" type="text/css" href="css/normal.css?i=4">
+<link rel="stylesheet" type="text/css" href="css/normal.css?i=5">
 <script src='js/airfile.js?v=2'></script>
 </head>
 
@@ -35,12 +35,22 @@ if($_SESSION['access-password'] == "password here") {
 </div>
 </div>
 <table height="100%">
-<tr>
+<tr valign=top>
 <td width='20%' bgcolor="lightgray">
+<div class='hold'>
+<table>
 <?php
-$username = $_GET['USERNAME'];
-echo $username;
+$USERNAME = $_GET['USERNAME'];
+echo "<tr><td><a class='folder' href='index.php?FS=/home/$USERNAME/Desktop&USERNAME=$USERNAME'>Desktop</a></td></tr>";
+echo "<tr><td><a class='folder' href='index.php?FS=/home/$USERNAME/Documents&USERNAME=$USERNAME'>Documents</a></td></tr>";
+echo "<tr><td><a class='folder' href='index.php?FS=/home/$USERNAME/Downloads&USERNAME=$USERNAME'>Downloads</a></td></tr>";
+echo "<tr><td><a class='folder' href='index.php?FS=/home/$USERNAME/Music&USERNAME=$USERNAME'>Music</a></td></tr>";
+echo "<tr><td><a class='folder' href='index.php?FS=/home/$USERNAME/Pictures&USERNAME=$USERNAME'>Pictures</a></td></tr>";
+echo "<tr><td><a class='folder' href='index.php?FS=/home/$USERNAME/Videos&USERNAME=$USERNAME'>Videos</a></td></tr>";
+echo "<hr>";
 ?>
+</table>
+</div>
 </td>
 <td>
 <div class='hold'>
@@ -150,7 +160,7 @@ var old = 1;
 
 function active(type) {
 if (type == "goto") {
-document.getElementById("tmp").innerHTML = httpGet("pane_html/goto.php?FS=<?php echo $_GET['FS']; ?>");
+document.getElementById("tmp").innerHTML = httpGet("pane_html/goto.php?FS=<?php echo $_GET['FS']; ?>&USERNAME=<?php echo $_GET['USERNAME']; ?>");
 }
 }
 </script>
