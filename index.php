@@ -40,16 +40,18 @@ if($_SESSION['access-password'] == "password here") {
 <div class='hold'>
 <table>
 <?php
+echo "<b>User Files</b>";
 $USERNAME = $_GET['USERNAME'];
-echo "<tr><td><a class='folder' href='index.php?FS=/home/$USERNAME/Desktop&USERNAME=$USERNAME'>Desktop</a></td></tr>";
-echo "<tr><td><a class='folder' href='index.php?FS=/home/$USERNAME/Documents&USERNAME=$USERNAME'>Documents</a></td></tr>";
-echo "<tr><td><a class='folder' href='index.php?FS=/home/$USERNAME/Downloads&USERNAME=$USERNAME'>Downloads</a></td></tr>";
-echo "<tr><td><a class='folder' href='index.php?FS=/home/$USERNAME/Music&USERNAME=$USERNAME'>Music</a></td></tr>";
+echo "<tr><td><img src='icns/sidebar/home.png' width='15px' height='15px'>  <a class='folder' href='index.php?FS=/home/$USERNAME&USERNAME=$USERNAME'>Home</a></td></tr>";
+echo "<tr><td><img src='icns/sidebar/desktop.png' width='15px' height='15px'>  <a class='folder' href='index.php?FS=/home/$USERNAME/Desktop&USERNAME=$USERNAME'>Desktop</a></td></tr>";
+echo "<tr><td><img src='icns/sidebar/document.png' width='15px' height='15px'>  <a class='folder' href='index.php?FS=/home/$USERNAME/Documents&USERNAME=$USERNAME'>Documents</a></td></tr>";
+echo "<tr><td><img src='icns/sidebar/download.png' width='15px' height='15px'>  <a class='folder' href='index.php?FS=/home/$USERNAME/Downloads&USERNAME=$USERNAME'>Downloads</a></td></tr>";
+echo "<tr><td><img src='icns/sidebar/music.png' width='15px' height='15px'>  <a class='folder' href='index.php?FS=/home/$USERNAME/Music&USERNAME=$USERNAME'>Music</a></td></tr>";
 echo "<tr><td><a class='folder' href='index.php?FS=/home/$USERNAME/Pictures&USERNAME=$USERNAME'>Pictures</a></td></tr>";
 echo "<tr><td><a class='folder' href='index.php?FS=/home/$USERNAME/Videos&USERNAME=$USERNAME'>Videos</a></td></tr>";
-echo "<hr>";
 ?>
 </table>
+<hr>
 </div>
 </td>
 <td>
@@ -110,9 +112,9 @@ foreach($files as $file) {
 	$fmt = $_GET['FS'] . "/" . $file;
 	$d++;
 	if ($read == True) {
-	echo("<tr id='$i'><td></td><td><img src='icns/folder.png' width='20px' height='15px'></img>&#160;&#160;&#160;&#160;&#160;<a class='folder' href='index.php?FS=$fmt'>$file</a></td><td>" . date ("F d Y H:i:s", filemtime($_GET['FS'] . "/" . $file)) .  "</td><td>Folder</td></tr>");
+	echo("<tr id='$i'><td></td><td><img src='icns/folder.png' width='15px' height='15px'></img>&#160;&#160;&#160;&#160;&#160;<a class='folder' href='index.php?FS=$fmt'>$file</a></td><td>" . date ("F d Y H:i:s", filemtime($_GET['FS'] . "/" . $file)) .  "</td><td>Folder</td></tr>");
 	} else {
-		echo("<tr id='$i'><td></td><td><img src='icns/folder.png' width='20px' height='15px'></img>&#160;&#160;&#160;&#160;&#160;<a class='unre' href='index.php?FS=$fmt'>$file</a></td><td>" . date ("F d Y H:i:s", filemtime($_GET['FS'] . "/" . $file)) .  "</td><td>Folder</td></tr>");
+		echo("<tr id='$i'><td></td><td><img src='icns/folder.png' width='15px' height='15px'></img>&#160;&#160;&#160;&#160;&#160;<a class='unre' href='index.php?FS=$fmt'>$file</a></td><td>" . date ("F d Y H:i:s", filemtime($_GET['FS'] . "/" . $file)) .  "</td><td>Folder</td></tr>");
 	}
 	} else {
 	$icon = findend($file);
@@ -121,9 +123,9 @@ foreach($files as $file) {
 	if ($read == True) {
 	$size = filesize($_GET['FS'] . "/" . $file);
 	$totalsize = $totalsize + $size;
-  echo("<tr id='$i' onclick='select(" . '"' . $i .  '"' .");' style='old'><td></td><td>&#160;<img src='icns/$icon' width='15px' height='20px'></img>&#160;&#160;&#160;&#160;&#160;<a class='file' href='external/aedit/?FILE=$fmt'>$file</a></td><td>" . date ("F d Y H:i:s", filemtime($_GET['FS'] . "/" . $file)) .  "</td><td>" . formatBytes($size) ."</td></tr>");
+  echo("<tr id='$i' onclick='select(" . '"' . $i .  '"' .");' style='old'><td></td><td>&#160;<img src='icns/$icon' width='15px' height='15px'></img>&#160;&#160;&#160;&#160;&#160;<a class='file' href='external/aedit/?FILE=$fmt'>$file</a></td><td>" . date ("F d Y H:i:s", filemtime($_GET['FS'] . "/" . $file)) .  "</td><td>" . formatBytes($size) ."</td></tr>");
 	} else {
-  echo("<tr id='$i' onclick='select(" . '"' . $i .  '"' .");' style='old'><td></td><td>&#160;<img src='icns/$icon' width='15px' height='20px'></img>&#160;&#160;&#160;&#160;&#160;<a class='unre'>$file</a></td><td>" . date ("F d Y H:i:s", filemtime($_GET['FS'] . "/" . $file)) .  "</td><td>" . formatBytes(filesize($_GET['FS'] . "/" . $file)) ."</td></tr>");
+  echo("<tr id='$i' onclick='select(" . '"' . $i .  '"' .");' style='old'><td></td><td>&#160;<img src='icns/$icon' width='15px' height='15px'></img>&#160;&#160;&#160;&#160;&#160;<a class='unre'>$file</a></td><td>" . date ("F d Y H:i:s", filemtime($_GET['FS'] . "/" . $file)) .  "</td><td>" . formatBytes(filesize($_GET['FS'] . "/" . $file)) ."</td></tr>");
 	}
 	}
 }
