@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=AirFile
+Comment=
+Exec=/var/www/AirFile/bin/air %f
+Icon=/var/www/AirFile/icns/folder.png
+Terminal=false
+Type=Application
+StartupNotify=true

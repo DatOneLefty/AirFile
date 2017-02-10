@@ -67,12 +67,7 @@ echo "<div id='tmp'></div>";
 }
 ?>
 <?php
-function formatBytes($size, $precision = 2)
-{
-    $base = log($size, 1024);
-    $suffixes = array('B', 'KB', 'MB', 'GB', 'TB');   
-    return round(pow(1024, $base - floor($base)), $precision) .' '. $suffixes[floor($base)];
-}
+
 $files = preg_grep('/^([^.])/', scandir($_GET['FS']));
 $a = 0;
 foreach($files as $file) {
@@ -88,19 +83,24 @@ if ($a < 1) {
 <?php
 $to = $_GET['FS'] .  "/..";
 echo "<img src='icns/back.png' width='20px' height='15px'></img>&#160;&#160;&#160;&#160;&#160;<a class='back' href='index.php?FS=$to'>Back</a>";
+
+$filelist = file_get_contents("data/use_list");
 ?>
 </center>
 <?php
 } else {
+if ($filelist != "false") {
 ?>
 <table>
 <tr><td></td><td><b>Name</b></td><td><b>Last Edited</b></td><td><b>Size</b></td></tr>
 <?php
+}
 $to = $_GET['FS'] .  "/..";
 echo("<tr><td></td><td><img src='icns/back.png' width='20px' height='15px'></img>&#160;&#160;&#160;&#160;&#160;<a class='back' href='index.php?FS=$to'>Back</a></td><td>" ."</td><td>" ."</td></tr>");
 $i = 0;
 $f = 0;
 $d = 0;
+
 foreach($files as $file) {
 	$i++;
 	if (is_readable($_GET['FS'] . "/" . $file)) {
@@ -112,7 +112,11 @@ foreach($files as $file) {
 	$fmt = $_GET['FS'] . "/" . $file;
 	$d++;
 	if ($read == True) {
+	if ($filelist == "false") {
+	echo "<div class='image' ><figure><img href='index.php?FS=$fmt' src='icns/folder.png' alt='missing'  width='80px' height='80px'/><figcaption href='index.php?FS=$fmt'>$file</figcaption></figure></div>";
+	} else {
 	echo("<tr id='$i'><td></td><td><img src='icns/folder.png' width='15px' height='15px'></img>&#160;&#160;&#160;&#160;&#160;<a class='folder' href='index.php?FS=$fmt'>$file</a></td><td>" . date ("F d Y H:i:s", filemtime($_GET['FS'] . "/" . $file)) .  "</td><td>Folder</td></tr>");
+	}
 	} else {
 		echo("<tr id='$i'><td></td><td><img src='icns/folder.png' width='15px' height='15px'></img>&#160;&#160;&#160;&#160;&#160;<a class='unre' href='index.php?FS=$fmt'>$file</a></td><td>" . date ("F d Y H:i:s", filemtime($_GET['FS'] . "/" . $file)) .  "</td><td>Folder</td></tr>");
 	}
@@ -123,7 +127,11 @@ foreach($files as $file) {
 	if ($read == True) {
 	$size = filesize($_GET['FS'] . "/" . $file);
 	$totalsize = $totalsize + $size;
+	if ($filelist == "false") {
+	echo "<div class='image' ><figure><img href='external/aedit/?FILE=$fmt' src='icns/file.png' alt='missing' width='80px' height='80px' /><figcaption href='external/aedit/?FILE=$fmt'>$file</figcaption></figure></div>";
+	} else {
   echo("<tr id='$i' onclick='select(" . '"' . $i .  '"' .");' style='old'><td></td><td>&#160;<img src='icns/$icon' width='15px' height='15px'></img>&#160;&#160;&#160;&#160;&#160;<a class='file' href='external/aedit/?FILE=$fmt'>$file</a></td><td>" . date ("F d Y H:i:s", filemtime($_GET['FS'] . "/" . $file)) .  "</td><td>" . formatBytes($size) ."</td></tr>");
+}
 	} else {
   echo("<tr id='$i' onclick='select(" . '"' . $i .  '"' .");' style='old'><td></td><td>&#160;<img src='icns/$icon' width='15px' height='15px'></img>&#160;&#160;&#160;&#160;&#160;<a class='unre'>$file</a></td><td>" . date ("F d Y H:i:s", filemtime($_GET['FS'] . "/" . $file)) .  "</td><td>" . formatBytes(filesize($_GET['FS'] . "/" . $file)) ."</td></tr>");
 	}

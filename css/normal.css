@@ -67,8 +67,27 @@ table {
 	width: 100%;
 	border: 0;
 }
+
+/* code from http://stackoverflow.com/questions/19138758/how-to-align-caption-underneath-image */
+figure {
+    display: inline-block;
+    border: 1px solid white;
+    margin: 10px;
+}
+figure img {
+    vertical-align: top;
+}
+figure figcaption {
+    border: 1px solid white;
+    text-align: center;
+}
+/* end */
 tr {
 
+}
+.image{
+    float:left;
+    width: 200px;
 }
 
 td {
