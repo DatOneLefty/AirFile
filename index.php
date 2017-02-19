@@ -113,9 +113,9 @@ foreach($files as $file) {
 	$d++;
 	if ($read == True) {
 	if ($filelist == "false") {
-	echo "<div class='image' ><figure><img href='index.php?FS=$fmt' src='icns/folder.png' alt='missing'  width='80px' height='80px'/><figcaption href='index.php?FS=$fmt'>$file</figcaption></figure></div>";
+	echo "<div class='image' ><figure><img href='index.php?FS=$fmt&USERNAME=$USERNAME' src='icns/folder.png' alt='missing'  width='80px' height='80px'/><figcaption href='index.php?FS=$fmt'>$file</figcaption></figure></div>";
 	} else {
-	echo("<tr id='$i'><td></td><td><img src='icns/folder.png' width='15px' height='15px'></img>&#160;&#160;&#160;&#160;&#160;<a class='folder' href='index.php?FS=$fmt'>$file</a></td><td>" . date ("F d Y H:i:s", filemtime($_GET['FS'] . "/" . $file)) .  "</td><td>Folder</td></tr>");
+	echo("<tr id='$i'><td></td><td><img src='icns/folder.png' width='15px' height='15px'></img>&#160;&#160;&#160;&#160;&#160;<a class='folder' href='index.php?FS=$fmt&USERNAME=$USERNAME'>$file</a></td><td>" . date ("F d Y H:i:s", filemtime($_GET['FS'] . "/" . $file)) .  "</td><td>Folder</td></tr>");
 	}
 	} else {
 		echo("<tr id='$i'><td></td><td><img src='icns/folder.png' width='15px' height='15px'></img>&#160;&#160;&#160;&#160;&#160;<a class='unre' href='index.php?FS=$fmt'>$file</a></td><td>" . date ("F d Y H:i:s", filemtime($_GET['FS'] . "/" . $file)) .  "</td><td>Folder</td></tr>");
@@ -128,9 +128,9 @@ foreach($files as $file) {
 	$size = filesize($_GET['FS'] . "/" . $file);
 	$totalsize = $totalsize + $size;
 	if ($filelist == "false") {
-	echo "<div class='image' ><figure><img href='external/aedit/?FILE=$fmt' src='icns/file.png' alt='missing' width='80px' height='80px' /><figcaption href='external/aedit/?FILE=$fmt'>$file</figcaption></figure></div>";
+	echo "<div class='image' ><figure><img href='external/aedit/?FILE=$fmt&USERNAME=$USERNAME' src='icns/file.png' alt='missing' width='80px' height='80px' /><figcaption href='external/aedit/?FILE=$fmt'>$file</figcaption></figure></div>";
 	} else {
-  echo("<tr id='$i' onclick='select(" . '"' . $i .  '"' .");' style='old'><td></td><td>&#160;<img src='icns/$icon' width='15px' height='15px'></img>&#160;&#160;&#160;&#160;&#160;<a class='file' href='external/aedit/?FILE=$fmt'>$file</a></td><td>" . date ("F d Y H:i:s", filemtime($_GET['FS'] . "/" . $file)) .  "</td><td>" . formatBytes($size) ."</td></tr>");
+  echo("<tr id='$i' onclick='select(" . '"' . $i .  '"' .");' style='old'><td></td><td>&#160;<img src='icns/$icon' width='15px' height='15px'></img>&#160;&#160;&#160;&#160;&#160;<a class='file' href='external/aedit/?FILE=$fmt&USERNAME=$USERNAME'>$file</a></td><td>" . date ("F d Y H:i:s", filemtime($_GET['FS'] . "/" . $file)) .  "</td><td>" . formatBytes($size) ."</td></tr>");
 }
 	} else {
   echo("<tr id='$i' onclick='select(" . '"' . $i .  '"' .");' style='old'><td></td><td>&#160;<img src='icns/$icon' width='15px' height='15px'></img>&#160;&#160;&#160;&#160;&#160;<a class='unre'>$file</a></td><td>" . date ("F d Y H:i:s", filemtime($_GET['FS'] . "/" . $file)) .  "</td><td>" . formatBytes(filesize($_GET['FS'] . "/" . $file)) ."</td></tr>");
@@ -153,7 +153,7 @@ echo "<br> In total there are " . ($f + $d) . " files and directories</center>";
 <div class='hold'>
 <h1>This AirFile system is locked</h1>
 <h3>Please enter the AirFile password</h3>
-<form action="login.php" method="post">
+<form action="login.php?USERNAME=<?php echo $_GET['USERNAME']; ?>" method="post">
 Access Password: <input type="password" name="password"><br>
 <input type="submit">
 </form>
